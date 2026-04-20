@@ -101,24 +101,24 @@ export default function AttendancePage() {
 
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="attendance" />
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 overflow-auto p-4 md:p-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-xl font-semibold text-gray-900">Time & Attendance</h1>
           <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
               <span className="material-icons text-base">download</span>
               <span>Export CSV</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
               <span className="material-icons text-base">settings</span>
               <span>Biometric Settings</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">
+            <button className="flex items-center gap-2 px-4 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 font-medium shadow-sm">
               <span className="material-icons text-base">touch_app</span>
               <span>Manual Punch Entry</span>
             </button>

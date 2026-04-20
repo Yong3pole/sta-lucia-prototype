@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #edf7f0;
   --foreground: #171717;
 }
 
@@ -25,6 +25,26 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Shared surface styling for consistent interface polish */
+.bg-white.rounded-lg.shadow,
+.bg-white.rounded-lg.border,
+.bg-white.rounded-lg.border.border-gray-200 {
+  @apply rounded-2xl border border-white bg-white/95 shadow-sm;
+}
+
+.bg-white.rounded-lg.shadow.p-6,
+.bg-white.rounded-lg.border.p-6,
+.bg-white.rounded-lg.border.border-gray-200.p-6 {
+  @apply rounded-2xl border border-white bg-white/95 shadow-sm;
+}
+
+.bg-white.rounded-lg.p-6,
+.bg-white.rounded-lg.p-6.border,
+.bg-white.rounded-lg.p-6.shadow,
+.bg-white.rounded-lg.p-6.border.border-gray-200 {
+  @apply rounded-2xl border border-white bg-white/95 shadow-sm;
+}
+
 /* Smooth transitions */
 * {
   @apply transition-all duration-200;
@@ -32,7 +52,7 @@ body {
 
 /* Button base styles */
 button {
-  @apply transition-all duration-200 ease-in-out;
+  @apply transition-all duration-200 ease-in-out rounded-lg;
 }
 
 button:active {
@@ -68,6 +88,23 @@ input:focus,
 textarea:focus,
 select:focus {
   @apply outline-none ring-2 ring-green-500 ring-offset-0;
+}
+
+input,
+select,
+textarea {
+  @apply rounded-xl bg-white border border-gray-300 shadow-sm;
+}
+
+/* Slightly increase compact typography for readability */
+.text-xs {
+  font-size: 0.8rem;
+  line-height: 1.15rem;
+}
+
+.text-sm {
+  font-size: 0.94rem;
+  line-height: 1.35rem;
 }
 
 /* Text selection */
