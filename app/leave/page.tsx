@@ -127,15 +127,15 @@ export default function LeavePage() {
         <div className="flex-1 overflow-auto p-4 md:p-8">
           
           {/* Tabs */}
-          <div className="flex items-center gap-6 border-b border-gray-200 mb-8">
+          <div className="flex items-center gap-6 border-b border-gray-200 mb-8 bg-white rounded-xl shadow-sm p-2">
             {["overview", "myLeaves", "teamLeaves", "calendar", "policies"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`flex items-center gap-2 px-1 py-3 border-b-2 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   activeTab === tab
-                    ? "border-green-700 text-gray-900"
-                    : "border-transparent text-gray-600 hover:text-gray-900"
+                    ? "bg-emerald-50 text-emerald-700 border-b-0"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                 }`}
               >
                 {tab === "overview" && (
