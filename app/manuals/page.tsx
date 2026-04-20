@@ -55,10 +55,10 @@ export default function Manuals() {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="manuals" />
 
-      <main className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden">
         <PageHeader 
           title="Company Manuals" 
           subtitle="Access and manage company documents synced from Google Drive."
@@ -70,7 +70,7 @@ export default function Manuals() {
           }
         />
 
-        <div className="flex-1 overflow-auto p-8">
+        <div className="flex-1 overflow-auto p-4 md:p-8">
           {/* Google Drive Section */}
           <div className="bg-white rounded-lg p-6 border border-gray-200 mb-8">
             <div className="flex items-start justify-between">

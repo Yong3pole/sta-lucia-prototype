@@ -116,16 +116,16 @@ export default function DepartmentsPage() {
   );
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="departments" />
 
-      <main className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden">
         <PageHeader 
           title="Departments" 
           subtitle="Manage and view all departments in your organization."
         />
 
-        <div className="flex-1 overflow-auto p-8">
+        <div className="flex-1 overflow-auto p-4 md:p-8">
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
@@ -170,13 +170,13 @@ export default function DepartmentsPage() {
             placeholder="Filter departments"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+            className="px-4 py-2 border border-gray-300 bg-white rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 font-medium"
           />
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
             <span className="material-icons text-base">filter_list</span>
             <span>Filter</span>
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
             <span className="material-icons text-base">sort</span>
             <span>Sort by Name</span>
           </button>

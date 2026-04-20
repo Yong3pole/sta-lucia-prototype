@@ -33,10 +33,10 @@ export default function Performance() {
   const maxOvertimeHours = Math.max(...overtimeByDept.map(d => d.hours));
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="performance" />
 
-      <main className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden">
         <PageHeader 
           title="Performance Analytics" 
           subtitle="Track attendance trends and performance metrics across your organization."
@@ -54,7 +54,7 @@ export default function Performance() {
           }
         />
 
-        <div className="flex-1 overflow-auto p-8">
+        <div className="flex-1 overflow-auto p-4 md:p-8">
           {/* Stats Cards */}
           <div className="grid grid-cols-4 gap-6 mb-8">
             {/* Overall Attendance */}

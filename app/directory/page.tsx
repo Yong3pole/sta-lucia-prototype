@@ -33,16 +33,16 @@ export default function DirectoryPage() {
   });
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="directory" />
 
-      <main className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden">
         <PageHeader 
           title="Employee Directory" 
           subtitle="Search and manage all employees in your organization."
         />
 
-        <div className="flex-1 overflow-auto p-8">
+        <div className="flex-1 overflow-auto p-4 md:p-8">
 
         {/* Filters */}
         <div className="flex gap-3 mb-6">
@@ -51,12 +51,12 @@ export default function DirectoryPage() {
             placeholder="Search employee by name, department, and title..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+            className="flex-1 px-4 py-2 border border-gray-300 bg-white rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 font-medium"
           />
           <select
             value={selectedDepartment}
             onChange={(e) => setSelectedDepartment(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-700"
+            className="px-4 py-2 border border-gray-300 rounded-xl text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-700 font-medium shadow-sm"
           >
             <option>All Departments</option>
             <option>Engineering</option>
@@ -69,7 +69,7 @@ export default function DirectoryPage() {
           <select
             value={selectedLocation}
             onChange={(e) => setSelectedLocation(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-700"
+            className="px-4 py-2 border border-gray-300 rounded-xl text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-700 font-medium shadow-sm"
           >
             <option>All Locations</option>
             <option>Cebu</option>
@@ -80,7 +80,7 @@ export default function DirectoryPage() {
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-700"
+            className="px-4 py-2 border border-gray-300 rounded-xl text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-700 font-medium shadow-sm"
           >
             <option>Active</option>
             <option>On Leave</option>

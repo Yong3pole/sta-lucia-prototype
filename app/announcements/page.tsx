@@ -57,10 +57,10 @@ export default function Announcements() {
   const highlightedDates = [10, 13, 18, 26, 27, 2]; // Dates with events
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="announcements" />
 
-      <main className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden">
         <PageHeader 
           title="Announcements" 
           subtitle="Stay updated with the latest company announcements and news."
@@ -72,7 +72,7 @@ export default function Announcements() {
           }
         />
 
-        <div className="flex-1 overflow-auto p-8">
+        <div className="flex-1 overflow-auto p-4 md:p-8">
           <div className="grid grid-cols-3 gap-8">
             {/* Left side announcements */}
             <div className="col-span-2">

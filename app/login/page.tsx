@@ -19,11 +19,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white rounded-xl shadow-lg flex w-full max-w-3xl overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-green-50 p-4">
+      <div className="bg-white/95 rounded-2xl border border-white shadow-sm flex w-full max-w-3xl overflow-hidden">
         {/* Left: Login Form */}
         <div className="flex-1 p-10 flex flex-col justify-center">
-          <h2 className="text-2xl font-bold mb-2 text-center text-gray-900">Welcome back</h2>
+          <h2 className="text-3xl font-bold mb-2 text-center text-gray-900 tracking-tight">Welcome back</h2>
           <p className="text-center text-gray-700 mb-6">Login to your SPOSS Nexus account</p>
           <form className="space-y-4" onSubmit={handleLogin}>
             <div>
@@ -35,7 +35,7 @@ export default function LoginPage() {
                 name="username"
                 type="text"
                 autoComplete="username"
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700 text-gray-900"
+                className="w-full border border-gray-300 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-700 text-gray-900"
                 placeholder="john1234"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
@@ -55,7 +55,7 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 autoComplete="current-password"
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-700 text-gray-900"
+                className="w-full border border-gray-300 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-700 text-gray-900"
                 placeholder="********"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -66,7 +66,7 @@ export default function LoginPage() {
             )}
             <button
               type="submit"
-              className="w-full bg-green-700 text-white py-2 rounded font-semibold hover:bg-green-800 transition"
+              className="w-full bg-green-700 text-white py-2.5 rounded-xl font-semibold hover:bg-green-800 transition"
             >
               Login
             </button>

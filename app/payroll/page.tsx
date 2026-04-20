@@ -55,28 +55,28 @@ export default function PayrollPage() {
 
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="payroll" />
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 overflow-auto p-4 md:p-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-xl font-semibold text-gray-900">Payroll</h1>
           <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
               <span className="material-icons text-base">receipt</span>
               <span>Payslip</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
               <span className="material-icons text-base">file_download</span>
               <span>Generate Payslip</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
               <span className="material-icons text-base">assessment</span>
               <span>Reports</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
               <span className="material-icons text-base">settings</span>
               <span>Payroll Settings</span>
             </button>
@@ -134,11 +134,11 @@ export default function PayrollPage() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Payroll Runs</h2>
               <div className="flex items-center gap-2">
-                <button className="flex items-center gap-2 px-3 py-1 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 text-sm">
+                <button className="flex items-center gap-2 px-3 py-1 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-emerald-50 text-sm font-medium shadow-sm">
                   <span className="material-icons text-base">filter_list</span>
                   <span>Filter</span>
                 </button>
-                <button className="flex items-center gap-2 px-4 py-1 bg-green-700 text-white rounded hover:bg-green-800 text-sm">
+                <button className="flex items-center gap-2 px-4 py-1 bg-green-700 text-white rounded-lg hover:bg-green-800 text-sm font-medium shadow-sm">
                   <span className="material-icons text-base">play_arrow</span>
                   <span>Run Payroll</span>
                 </button>
