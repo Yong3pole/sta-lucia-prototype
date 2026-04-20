@@ -29,7 +29,7 @@ export default function Sidebar({ activeMenu }: SidebarProps) {
     <div className="w-64 bg-white border-r border-gray-200 overflow-y-auto flex flex-col h-screen">
       {/* Header */}
       <div className="flex items-center gap-2 px-6 py-6 border-b">
-        <span className="font-bold text-lg text-gray-900">SPOSS Nexus HR.</span>
+        <span className="font-bold text-lg text-gray-900">SPOSS Nexus HR</span>
       </div>
 
       {/* Navigation */}
