@@ -24,7 +24,7 @@ export default function LoginPage() {
         {/* Left: Login Form */}
         <div className="flex-1 p-10 flex flex-col justify-center">
           <h2 className="text-3xl font-bold mb-2 text-center text-gray-900 tracking-tight">Welcome back</h2>
-          <p className="text-center text-gray-700 mb-6">Login to your SPOSS Nexus account</p>
+          <p className="text-center text-gray-700 mb-6">Login to your ForenSync HRIS account</p>
           <form className="space-y-4" onSubmit={handleLogin}>
             <div>
               <label className="block text-sm font-medium text-gray-800 mb-1" htmlFor="username">

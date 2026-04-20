@@ -214,14 +214,14 @@ export default function DashboardPage() {
                 </thead>
                 <tbody>
                   {[
-                    { name: "Camille Perez", email: "camille.perez@spossnexus.com", role: "Recruiter", dept: "Human Resources", status: "Active", img: "https://randomuser.me/api/portraits/women/1.jpg" },
-                    { name: "Lara Santos", email: "lara.santos@spossnexus.com", role: "Qa Engineer", dept: "Engineering", status: "Active", img: "https://randomuser.me/api/portraits/women/2.jpg" },
-                    { name: "Grace Mendoza", email: "grace.mendoza@spossnexus.com", role: "Hr Assistant", dept: "Human Resources", status: "Active", img: "https://randomuser.me/api/portraits/women/3.jpg" },
-                    { name: "Chris Navarro", email: "chris.navarro@spossnexus.com", role: "Security Officer", dept: "Security", status: "Active", img: "https://randomuser.me/api/portraits/men/1.jpg" },
-                    { name: "Nina Garcia", email: "nina.garcia@spossnexus.com", role: "Marketing Specialist", dept: "Marketing", status: "Active", img: "https://randomuser.me/api/portraits/women/4.jpg" },
-                    { name: "Faith Santiago", email: "faith.santiago@spossnexus.com", role: "Pr Coordinator", dept: "Marketing", status: "Active", img: "https://randomuser.me/api/portraits/women/5.jpg" },
-                    { name: "Isabel Torres", email: "isabel.torres@spossnexus.com", role: "Content Writer", dept: "Marketing", status: "Active", img: "https://randomuser.me/api/portraits/women/6.jpg" },
-                    { name: "Daniel Cruz", email: "daniel.cruz@spossnexus.com", role: "Ui UX Designer", dept: "Design", status: "Active", img: "https://randomuser.me/api/portraits/men/2.jpg" },
+                    { name: "Camille Perez", email: "camille.perez@forensync.com", role: "Recruiter", dept: "Human Resources", status: "Active", img: "https://randomuser.me/api/portraits/women/1.jpg" },
+                    { name: "Lara Santos", email: "lara.santos@forensync.com", role: "Qa Engineer", dept: "Engineering", status: "Active", img: "https://randomuser.me/api/portraits/women/2.jpg" },
+                    { name: "Grace Mendoza", email: "grace.mendoza@forensync.com", role: "Hr Assistant", dept: "Human Resources", status: "Active", img: "https://randomuser.me/api/portraits/women/3.jpg" },
+                    { name: "Chris Navarro", email: "chris.navarro@forensync.com", role: "Security Officer", dept: "Security", status: "Active", img: "https://randomuser.me/api/portraits/men/1.jpg" },
+                    { name: "Nina Garcia", email: "nina.garcia@forensync.com", role: "Marketing Specialist", dept: "Marketing", status: "Active", img: "https://randomuser.me/api/portraits/women/4.jpg" },
+                    { name: "Faith Santiago", email: "faith.santiago@forensync.com", role: "Pr Coordinator", dept: "Marketing", status: "Active", img: "https://randomuser.me/api/portraits/women/5.jpg" },
+                    { name: "Isabel Torres", email: "isabel.torres@forensync.com", role: "Content Writer", dept: "Marketing", status: "Active", img: "https://randomuser.me/api/portraits/women/6.jpg" },
+                    { name: "Daniel Cruz", email: "daniel.cruz@forensync.com", role: "Ui UX Designer", dept: "Design", status: "Active", img: "https://randomuser.me/api/portraits/men/2.jpg" },
                   ].map((emp, idx) => (
                     <tr key={idx} className="border-t border-gray-100 hover:bg-emerald-50/40 transition-colors">
                       <td className="py-2 px-2 flex items-center gap-2">
