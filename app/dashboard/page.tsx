@@ -1,9 +1,112 @@
 
 "use client";
+import { useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import PageHeader from "../components/PageHeader";
 
+type EventType = "birthday" | "anniversary" | "regularization";
+
+type CalendarEvent = {
+  id: string;
+  title: string;
+  date: string;
+  type: EventType;
+};
+
+const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const EVENT_TYPE_STYLES: Record<EventType, { chip: string; label: string; emptyText: string }> = {
+  birthday: {
+    chip: "bg-pink-100 text-pink-700",
+    label: "Birthdays",
+    emptyText: "No birthdays today",
+  },
+  anniversary: {
+    chip: "bg-blue-100 text-blue-700",
+    label: "Work Anniversaries",
+    emptyText: "No anniversaries today",
+  },
+  regularization: {
+    chip: "bg-green-100 text-green-700",
+    label: "Regularizations",
+    emptyText: "No regularizations today",
+  },
+};
+
+function toDateKey(year: number, monthOneBased: number, day: number) {
+  return `${year}-${String(monthOneBased).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function getDemoEvents(year: number): CalendarEvent[] {
+  return [
+    { id: "apr-6-regularization", title: "Employee 21", date: toDateKey(year, 4, 6), type: "regularization" },
+    { id: "apr-10-birthday", title: "Employee 3", date: toDateKey(year, 4, 10), type: "birthday" },
+    { id: "apr-10-anniversary", title: "Employee 3", date: toDateKey(year, 4, 10), type: "anniversary" },
+    { id: "apr-18-birthday", title: "Employee 15", date: toDateKey(year, 4, 18), type: "birthday" },
+    { id: "apr-18-anniversary", title: "Employee 15", date: toDateKey(year, 4, 18), type: "anniversary" },
+    { id: "apr-26-birthday", title: "Employee 27", date: toDateKey(year, 4, 26), type: "birthday" },
+    { id: "apr-26-anniversary", title: "Employee 27", date: toDateKey(year, 4, 26), type: "anniversary" },
+    { id: "apr-26-regularization", title: "Employee 9", date: toDateKey(year, 4, 26), type: "regularization" },
+    { id: "may-1-birthday", title: "Employee 28", date: toDateKey(year, 5, 1), type: "birthday" },
+    { id: "may-1-anniversary", title: "Employee 28", date: toDateKey(year, 5, 1), type: "anniversary" },
+    { id: "may-2-regularization", title: "Employee 10", date: toDateKey(year, 5, 2), type: "regularization" },
+    { id: "mar-20-birthday", title: "Employee 11", date: toDateKey(year, 3, 20), type: "birthday" },
+    { id: "mar-20-anniversary", title: "Employee 11", date: toDateKey(year, 3, 20), type: "anniversary" },
+    { id: "jun-8-regularization", title: "Employee 5", date: toDateKey(year, 6, 8), type: "regularization" },
+    { id: "jun-14-birthday", title: "Employee 34", date: toDateKey(year, 6, 14), type: "birthday" },
+    { id: "jun-19-anniversary", title: "Employee 19", date: toDateKey(year, 6, 19), type: "anniversary" },
+  ];
+}
+
+function formatDateKey(date: Date) {
+  return toDateKey(date.getFullYear(), date.getMonth() + 1, date.getDate());
+}
+
 export default function DashboardPage() {
+  const today = useMemo(() => new Date(), []);
+  const [activeMonth, setActiveMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
+
+  const mockEvents = useMemo(() => getDemoEvents(today.getFullYear()), [today]);
+  const eventsByDate = useMemo(() => {
+    const mapped: Record<string, CalendarEvent[]> = {};
+    for (const item of mockEvents) {
+      if (!mapped[item.date]) {
+        mapped[item.date] = [];
+      }
+      mapped[item.date].push(item);
+    }
+    return mapped;
+  }, [mockEvents]);
+
+  const monthLabel = activeMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const activeYear = activeMonth.getFullYear();
+  const activeMonthIndex = activeMonth.getMonth();
+  const firstWeekDay = new Date(activeYear, activeMonthIndex, 1).getDay();
+
+  const calendarDates = Array.from({ length: 42 }, (_, index) => {
+    const dayOffset = index - firstWeekDay + 1;
+    const date = new Date(activeYear, activeMonthIndex, dayOffset);
+    const key = formatDateKey(date);
+    return {
+      date,
+      key,
+      day: date.getDate(),
+      isCurrentMonth: date.getMonth() === activeMonthIndex,
+      isToday: key === formatDateKey(today),
+      events: eventsByDate[key] ?? [],
+    };
+  });
+
+  const todayKey = formatDateKey(today);
+  const todaysEvents = eventsByDate[todayKey] ?? [];
+  const todayDateLabel = today.toLocaleDateString("en-CA");
+
+  const groupedTodayEvents: Record<EventType, CalendarEvent[]> = {
+    birthday: todaysEvents.filter((event) => event.type === "birthday"),
+    anniversary: todaysEvents.filter((event) => event.type === "anniversary"),
+    regularization: todaysEvents.filter((event) => event.type === "regularization"),
+  };
+
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar activeMenu="dashboard" />
@@ -118,16 +221,144 @@ export default function DashboardPage() {
             </div>
             <div>
               <h3 className="text-base font-semibold mb-3 text-gray-900">Snapshot</h3>
-              <ul className="space-y-1 text-xs text-gray-800">
-                <li className="flex justify-between"><span>Attendance complience</span><span>96%</span></li>
-                <li className="flex justify-between"><span>Payroll ready employees</span><span>94%</span></li>
-                <li className="flex justify-between"><span>Leave capacity next week</span><span>82%</span></li>
+              <ul className="space-y-3 text-xs text-gray-800">
+                <li>
+                  <div>Attendance complience</div>
+                  <div className="flex justify-between gap-3 text-gray-700">
+                    <span>412 / 427 employees on time</span>
+                    <span className="font-semibold text-gray-900">96%</span>
+                  </div>
+                </li>
+                <li>
+                  <div>Payroll ready employees</div>
+                  <div className="flex justify-between gap-3 text-gray-700">
+                    <span>403 records verified</span>
+                    <span className="font-semibold text-gray-900">94%</span>
+                  </div>
+                </li>
+                <li>
+                  <div>Leave capacity next week</div>
+                  <div className="flex justify-between gap-3 text-gray-700">
+                    <span>Sales department nearing cap</span>
+                    <span className="font-semibold text-gray-900">82%</span>
+                  </div>
+                </li>
+                <li>
+                  <div>Goal completion</div>
+                  <div className="flex justify-between gap-3 text-gray-700">
+                    <span>3 teams above target</span>
+                    <span className="font-semibold text-gray-900">84%</span>
+                  </div>
+                </li>
               </ul>
-              <ul className="space-y-1 text-xs mt-2 text-gray-700">
-                <li>412 / 427 employees on time</li>
-                <li>403 records verified</li>
-                <li>Sales department nearing cap</li>
-              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Events Calendar */}
+        <div className="mt-8 grid grid-cols-1 xl:grid-cols-3 gap-6 pb-8">
+          <div className="xl:col-span-2 rounded-xl border border-gray-200 bg-white shadow-sm">
+            <div className="p-6 pb-3">
+              <div className="text-2xl font-semibold text-gray-900">Events Calendar</div>
+            </div>
+
+            <div className="px-6 pb-3 flex items-center justify-between gap-3">
+              <div className="text-3xl font-semibold text-gray-900">{monthLabel}</div>
+              <div className="flex items-center rounded-lg border border-gray-300 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setActiveMonth(new Date(activeYear, activeMonthIndex - 1, 1))}
+                  className="px-3 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  &lt;
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveMonth(new Date(today.getFullYear(), today.getMonth(), 1))}
+                  className="px-4 py-2 bg-green-700 text-white text-sm font-medium hover:bg-green-800"
+                >
+                  Today
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveMonth(new Date(activeYear, activeMonthIndex + 1, 1))}
+                  className="px-3 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  &gt;
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-7 border-t border-gray-200">
+              {WEEK_DAYS.map((day) => (
+                <div key={day} className="p-3 text-xs text-gray-500 border-r last:border-r-0 border-gray-200">
+                  {day}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 border-t border-gray-200">
+              {calendarDates.map((cell, idx) => (
+                <div
+                  key={`${cell.key}-${idx}`}
+                  className="min-h-28 p-2 border-r border-b border-gray-200 last:border-r-0"
+                >
+                  <div className="mb-2">
+                    <span
+                      className={`inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1 text-xs ${
+                        cell.isToday
+                          ? "bg-green-700 text-white"
+                          : cell.isCurrentMonth
+                            ? "text-gray-800"
+                            : "text-gray-400"
+                      }`}
+                    >
+                      {cell.day}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    {cell.events.slice(0, 3).map((event) => (
+                      <div
+                        key={event.id}
+                        className={`rounded px-2 py-1 text-[11px] truncate ${EVENT_TYPE_STYLES[event.type].chip}`}
+                        title={`${EVENT_TYPE_STYLES[event.type].label}: ${event.title}`}
+                      >
+                        {event.title}
+                      </div>
+                    ))}
+
+                    {cell.events.length > 3 && (
+                      <div className="text-[11px] text-gray-500">+{cell.events.length - 3} more</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm h-fit">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-2xl font-semibold text-gray-900">Today's Events</h3>
+              <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">Today</span>
+            </div>
+            <div className="mb-4 text-sm text-gray-500">{todayDateLabel}</div>
+
+            <div className="space-y-4">
+              {(["birthday", "anniversary", "regularization"] as EventType[]).map((type) => {
+                const config = EVENT_TYPE_STYLES[type];
+                const items = groupedTodayEvents[type];
+                return (
+                  <div key={type}>
+                    <div className={`font-semibold ${config.chip} inline-flex rounded px-2 py-1 text-sm`}>
+                      {config.label}
+                    </div>
+                    <div className="mt-2 text-sm text-gray-500">
+                      {items.length > 0 ? items.map((item) => item.title).join(", ") : config.emptyText}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

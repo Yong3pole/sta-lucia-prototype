@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SPOSS Nexus HR",
+  title: "ForenSync HRIS",
   description: "Human Resources Management System",
 };
 
