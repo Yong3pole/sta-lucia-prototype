@@ -3,8 +3,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 Required:
-```
-pnpm/yarn/npm install
+```bash
+pnpm install
+# or
+yarn install
+# or
+npm install
 ```
 
 First, run the development server:
