@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import Sidebar from "../components/Sidebar";
-import PageHeader from "../components/PageHeader";
+import ManualPunchModal from "./components/ManualPunchModal";
 
 export default function AttendancePage() {
+  const [showManualPunchModal, setShowManualPunchModal] = useState(false);
 
   const punches = [
     {
@@ -99,7 +101,6 @@ export default function AttendancePage() {
     },
   ];
 
-
   return (
     <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="attendance" />
@@ -114,11 +115,16 @@ export default function AttendancePage() {
               <span className="material-icons text-base">download</span>
               <span>Export CSV</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
-              <span className="material-icons text-base">settings</span>
-              <span>Biometric Settings</span>
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 font-medium shadow-sm">
+            <Link href="/attendance/biometrics/SyncNetworkRules">
+              <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
+                <span className="material-icons text-base">settings</span>
+                <span>Biometric Settings</span>
+              </button>
+            </Link>
+            <button 
+              onClick={() => setShowManualPunchModal(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 font-medium shadow-sm"
+            >
               <span className="material-icons text-base">touch_app</span>
               <span>Manual Punch Entry</span>
             </button>
@@ -260,6 +266,16 @@ export default function AttendancePage() {
           </div>
         </div>
       </main>
+
+      {/* Manual Punch Entry Modal */}
+      <ManualPunchModal
+        isOpen={showManualPunchModal}
+        onClose={() => setShowManualPunchModal(false)}
+        onConfirm={(data) => {
+          console.log("Manual punch entry:", data);
+          setShowManualPunchModal(false);
+        }}
+      />
     </div>
   );
 }

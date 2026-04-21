@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
-import PageHeader from "../components/PageHeader";
+import AddDepartmentModal from "./components/AddDepartmentModal";
 
 export default function DepartmentsPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const departments = [
     {
@@ -119,67 +120,76 @@ export default function DepartmentsPage() {
     <div className="flex h-screen bg-green-50">
       <Sidebar activeMenu="departments" />
 
-      <main className="flex-1 flex flex-col overflow-hidden">
-        <PageHeader 
-          title="Departments" 
-          subtitle="Manage and view all departments in your organization."
-        />
+      {/* Main Content */}
+      <main className="flex-1 overflow-auto p-4 md:p-8">
+        {/* Header - Matching attendance page style */}
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-xl font-semibold text-gray-900">Departments</h1>
+          <button 
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 font-medium shadow-sm"
+          >
+            <span className="material-icons text-base">add</span>
+            <span>New Department</span>
+          </button>
+        </div>
 
-        <div className="flex-1 overflow-auto p-4 md:p-8">
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+        {/* Stats - Matching attendance page card style */}
+        <div className="grid grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-start justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <span className="material-icons text-blue-600 text-2xl">business</span>
+              </div>
               <div>
-                <p className="text-gray-600 text-sm mb-1">Total Departments</p>
                 <p className="text-3xl font-bold text-gray-900">8</p>
-              </div>
-              <div className="bg-blue-100 p-3 rounded-lg">
-                <span className="material-icons text-blue-600">apartment</span>
+                <p className="text-sm text-gray-500">Total Departments</p>
               </div>
             </div>
           </div>
           <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-start justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
+                <span className="material-icons text-teal-600 text-2xl">people</span>
+              </div>
               <div>
-                <p className="text-gray-600 text-sm mb-1">Total Employees</p>
                 <p className="text-3xl font-bold text-gray-900">248</p>
-              </div>
-              <div className="bg-teal-100 p-3 rounded-lg">
-                <span className="material-icons text-teal-600">people</span>
+                <p className="text-sm text-gray-500">Total Employees</p>
               </div>
             </div>
           </div>
           <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-gray-600 text-sm mb-1">Open Roles</p>
-                <p className="text-3xl font-bold text-gray-900">24</p>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                <span className="material-icons text-amber-600 text-2xl">work</span>
               </div>
-              <div className="bg-amber-100 p-3 rounded-lg">
-                <span className="material-icons text-amber-600">work</span>
+              <div>
+                <p className="text-3xl font-bold text-gray-900">24</p>
+                <p className="text-sm text-gray-500">Open Roles</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="flex gap-3 mb-6 items-center">
+        {/* Search and Filter - Simple row as shown in image */}
+        <div className="flex gap-3 mb-6">
           <input
             type="text"
             placeholder="Filter departments"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border border-gray-300 bg-white rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 font-medium"
+            className="w-125 px-4 py-2 border border-gray-300 bg-white rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 font-medium"
           />
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
-            <span className="material-icons text-base">filter_list</span>
-            <span>Filter</span>
-          </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
-            <span className="material-icons text-base">sort</span>
-            <span>Sort by Name</span>
-          </button>
+          <div className="flex gap-3 ml-auto">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
+              <span className="material-icons text-base">filter_list</span>
+              <span>Filter</span>
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-emerald-50 font-medium shadow-sm">
+              <span className="material-icons text-base">sort</span>
+              <span>Sort by Name</span>
+            </button>
+          </div>
         </div>
 
         {/* Department Grid */}
@@ -239,8 +249,18 @@ export default function DepartmentsPage() {
             </div>
           ))}
         </div>
-        </div>
       </main>
+
+      {/* Add Department Modal */}
+      <AddDepartmentModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onConfirm={(data) => {
+          console.log("New department:", data);
+          // Handle department creation here
+          setShowAddModal(false);
+        }}
+      />
     </div>
   );
 }
